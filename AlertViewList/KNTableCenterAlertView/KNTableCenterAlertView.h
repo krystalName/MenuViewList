@@ -32,4 +32,22 @@ typedef void(^KNTableCenterAlertViewBlock)(NSInteger index);
           Images:(NSArray <UIImage *> *)images
           ListTitles:(NSArray <NSString *>*)listTitles
            block:(KNTableCenterAlertViewBlock)block;
+
+
+/**
+ 初始化菜单,选择你需要的格式，可以不传标题,可以不传图片。必须传列表数组，至少一个以上！ 否则什么都不显示
+ 
+ @param title 标题
+ @param images 图片数组
+ @param listTitles 内容数组
+ @param selectedIndex 选中的下标
+ @param block 返回的下标
+ */
++(void)ShowWIthTitle:(NSString *)title
+              Images:(NSArray <UIImage *> *)images
+          ListTitles:(NSArray <NSString *>*)listTitles
+            SelectedIndex:(NSInteger )selectedIndex
+               block:(KNTableCenterAlertViewBlock)block;
+
+
 @end

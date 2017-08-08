@@ -20,6 +20,7 @@
 #define TitleColor [UIColor colorWithRed:249/255.0 green:37/255.0 blue:114/255.0 alpha:1]
 #define ListButtonBackgroundColor [UIColor colorWithRed:251/255.0 green:251/255.0 blue:253/255.0 alpha:1]
 #define ListButtonClolor [UIColor blackColor]
+#define ListButtonSelectdColor  [UIColor colorWithRed:225/255.0 green:225/255.0 blue:225/255.0 alpha:1]
 #define ListHighlightedColor [UIColor colorWithRed:219/255.0 green:219/255.0 blue:219/255.0 alpha:1]
 #define ContentViewBackgroundColor  [UIColor clearColor]
 
@@ -58,6 +59,9 @@
  标签数组
  */
 @property (nonatomic, strong)NSArray <NSString *> * listTitles;
+
+//当前选中下标
+@property (nonatomic, assign)NSInteger selectedIndex;
 
 
 @property (nonatomic, copy)KNTableCenterAlertViewBlock block;
@@ -99,6 +103,24 @@
 }
 
 
++(void)ShowWIthTitle:(NSString *)title Images:(NSArray<UIImage *> *)images ListTitles:(NSArray<NSString *> *)listTitles SelectedIndex:(NSInteger)selectedIndex block:(KNTableCenterAlertViewBlock)block{
+    
+    
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+    KNTableCenterAlertView *alertView = [KNTableCenterAlertView new];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    alertView.frame = window.bounds;
+    alertView.title = title;
+    alertView.images = images;
+    alertView.listTitles = listTitles;
+    alertView.block = block;
+    alertView.selectedIndex = selectedIndex;
+    [alertView Show];
+    [window addSubview:alertView];
+    
+}
+
+
 
 -(void)Show{
     
@@ -121,7 +143,6 @@
         titleLabel.text = self.title;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.backgroundColor = [UIColor whiteColor];
-        titleLabel.tag = tag;
         titleLabel.frame = CGRectMake(0, 0, ContentViewWidth, TitleHeight);
         [contentView addSubview:titleLabel];
         heigt = TitleHeight + LineHeight;
@@ -146,17 +167,31 @@
 
         UIButton * Button = [self createButtonWithTitle:self.listTitles[i] font:ListButtonFont image:ImageCount>0?self.images[i]:nil height:ListButtonHeight y:heigt + (ListButtonHeight + LineHeight) * i];
             
-            [contentView addSubview:Button];
+        
             
             if (i == count -1) {
                 heigt += (ListButtonHeight + LineHeight) * i + ListButtonHeight;
                 
             }
+        
+      
+        
             Button.tag = tag;
             tag++;
-     
-            
+        
+        //判断不为nil
+        if (self.selectedIndex) {
+            if (self.selectedIndex == tag) {
+                [Button setBackgroundColor:ListButtonSelectdColor];
+            }
         }
+        
+        
+        
+            [contentView addSubview:Button];
+        
+        }
+    
     
     
     
@@ -196,7 +231,6 @@
     [button setBackgroundImage:[self imageWithColor:ListHighlightedColor] forState:UIControlStateHighlighted];
     button.frame = CGRectMake(0, y , ContentViewWidth, height);
     [button addTarget:self action:@selector(ButClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     //加上内容
     UILabel *titleLable = [[UILabel alloc]init];
@@ -247,6 +281,8 @@
     }];
     
 }
+
+
 
 -(UIImage *)imageWithColor:(UIColor*)color
 {

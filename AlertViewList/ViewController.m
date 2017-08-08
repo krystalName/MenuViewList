@@ -109,8 +109,9 @@
     //定义一个图片数组
     NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
                                     ];
-  [KNTableCenterAlertView ShowWithTitle:@"这是标题" Images:images ListTitles:@[@"添加好友",@"面对面快传",@"发起多人聊天",@"付款",@"扫一扫"] block:^(NSInteger index) {
-        [self CreateAlertView:index];
+
+    [KNTableCenterAlertView ShowWithTitle:@"这是标题" Images:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSInteger index) {
+        
     }];
     
     
