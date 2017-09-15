@@ -110,10 +110,6 @@
     NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
                                     ];
 
-    [KNTableCenterAlertView ShowWithTitle:@"这是标题" Images:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSInteger index) {
-        
-    }];
-    
     
     [KNTableCenterAlertView ShowWIthTitle:@"这是标题" Images:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] SelectedIndex:1 block:^(NSInteger index) {
         
