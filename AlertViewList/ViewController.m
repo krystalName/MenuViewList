@@ -115,6 +115,9 @@
     }];
     
     
+    [KNTableCenterAlertView ShowWIthTitle:@"这是标题" Images:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] SelectedIndex:1 block:^(NSInteger index) {
+        
+    }];
     
 }
 
