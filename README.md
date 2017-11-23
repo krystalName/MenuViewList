@@ -23,7 +23,7 @@
 ![](https://github.com/krystalName/MenuViewList/blob/MenuView/TableCenterAlertView.gif)
 
 ## 使用方式有两种。
-1.使用没有设置默认选中的模式
++ 使用没有设置默认选中的模式
 
 ```objc
     //定义一个图片数组
@@ -36,7 +36,7 @@
 ```
 
 
-2.使用设置默认选中的模式。  为了避免冲突。所以下标0 就代表 不默认。 下标1开始以此内推 
++ 使用设置默认选中的模式。  为了避免冲突。所以下标0 就代表 不默认。 下标1开始以此内推 
 ``` objc
     //定义一个图片数组
     NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
