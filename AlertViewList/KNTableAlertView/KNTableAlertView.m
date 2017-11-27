@@ -90,6 +90,7 @@
     alertView.block = block;
     [alertView Show];
     [window addSubview:alertView];
+    
 }
 
 //展示

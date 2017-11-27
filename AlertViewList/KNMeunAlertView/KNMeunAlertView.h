@@ -9,9 +9,22 @@
 #import <UIKit/UIKit.h>
 
 
+//点击事件
+typedef void(^IteomsClickBlock)(NSString *str, NSInteger tag);
 
 
 @interface KNMeunAlertView : UIView
+
+@property (nonatomic, copy) IteomsClickBlock itemsClickBlock;
+
+
+
++(KNMeunAlertView *)createMenuWithFrame:(CGRect )frame titleArray:
+(NSArray *)titleArray ImageArray:(NSArray *)ImageArray itemsClick:(void(^)(NSString *str,NSInteger tag))itemsClickBlock bakeViewHideBlock:
+(void(^)(void))bakeHideBlock;
+
+
+
 
 
 

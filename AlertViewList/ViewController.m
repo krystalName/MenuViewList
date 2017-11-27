@@ -20,12 +20,16 @@
 //显示表格
 @property (nonatomic, strong)NSArray *dataArray;
 
+
+@property(nonatomic, assign)NSInteger index;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.index = 0;
 
     
     [self.view addSubview:self.tableView];
@@ -119,6 +123,9 @@
 
 -(void)CreateKNMeunAlertView{
     
+    
+    
+
 }
 
 
@@ -132,6 +139,8 @@
     [alertC addAction:alert1];
     [self presentViewController:alertC animated:YES completion:nil];
 }
+
+
 
 -(NSArray *)dataArray{
     if(!_dataArray)

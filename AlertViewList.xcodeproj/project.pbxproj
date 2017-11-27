@@ -16,6 +16,7 @@
 		C241D3F21F2F08BA003218C0 /* KNTableAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C241D3F11F2F08BA003218C0 /* KNTableAlertView.m */; };
 		C241D3F61F2F08E3003218C0 /* KNTableCenterAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C241D3F51F2F08E3003218C0 /* KNTableCenterAlertView.m */; };
 		C241D3FA1F30742A003218C0 /* KNMeunAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C241D3F91F30742A003218C0 /* KNMeunAlertView.m */; };
+		C2DFFB391FCBE22A00831398 /* UIView+KNViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFFB381FCBE22A00831398 /* UIView+KNViewExtend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		C241D3F51F2F08E3003218C0 /* KNTableCenterAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNTableCenterAlertView.m; sourceTree = "<group>"; };
 		C241D3F81F30742A003218C0 /* KNMeunAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNMeunAlertView.h; sourceTree = "<group>"; };
 		C241D3F91F30742A003218C0 /* KNMeunAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNMeunAlertView.m; sourceTree = "<group>"; };
+		C2DFFB371FCBE22A00831398 /* UIView+KNViewExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KNViewExtend.h"; sourceTree = "<group>"; };
+		C2DFFB381FCBE22A00831398 /* UIView+KNViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KNViewExtend.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 			children = (
 				C241D3F81F30742A003218C0 /* KNMeunAlertView.h */,
 				C241D3F91F30742A003218C0 /* KNMeunAlertView.m */,
+				C2DFFB371FCBE22A00831398 /* UIView+KNViewExtend.h */,
+				C2DFFB381FCBE22A00831398 /* UIView+KNViewExtend.m */,
 			);
 			path = KNMeunAlertView;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2DFFB391FCBE22A00831398 /* UIView+KNViewExtend.m in Sources */,
 				C24165781F29BEF60077FBEE /* ViewController.m in Sources */,
 				C241D3F61F2F08E3003218C0 /* KNTableCenterAlertView.m in Sources */,
 				C241D3F21F2F08BA003218C0 /* KNTableAlertView.m in Sources */,
