@@ -6,10 +6,11 @@
 //  Copyright © 2017年 KrystalName. All rights reserved.
 //
 
-#import "KNMeunAlertView.h"
+#import "KNMenuAlertView.h"
 
 
-@implementation KNMeunAlertView
+
+@implementation KNMenuAlertView
 
 
 @end
