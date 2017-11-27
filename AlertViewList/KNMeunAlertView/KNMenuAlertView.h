@@ -10,7 +10,7 @@
 
 
 //点击事件
-typedef void(^IteomsClickBlock)(NSString *str, NSInteger tag);
+typedef void(^IteomsClickBlock)(NSString *str,NSInteger tag);
 
 
 @interface KNMenuAlertView : UIView
