@@ -29,8 +29,11 @@ typedef void(^IteomsClickBlock)(NSString *str, NSInteger tag);
           ListTitles:(NSArray <NSString *>*)listTitles
                block:(IteomsClickBlock)block;
 
+//展示菜单, 定点展示
 +(void)showMenuAtPoint:(CGPoint)point;
 
+//隐藏菜单
++(void)hiddenView;
 
 
 
