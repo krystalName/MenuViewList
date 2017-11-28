@@ -44,7 +44,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
+        self.backgroundColor = [UIColor whiteColor];
 
         [self initView];
     }
@@ -192,8 +192,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.textLabel.font = [UIFont systemFontOfSize:13];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.backgroundColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
+//        cell.textLabel.textColor = [UIColor whiteColor];
+//        cell.backgroundColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
     }
     
     [cell.imageView setImage:self.images[indexPath.row]];
