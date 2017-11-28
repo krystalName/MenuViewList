@@ -164,11 +164,6 @@
 }
 
 
-+(void)hiddenView
-{
-    KNMenuAlertView *menuView = [[UIApplication sharedApplication].keyWindow viewWithTag:kMenuTag];
-    [menuView hiddenMenu];
-}
 
 
 #pragma 设置行高
@@ -209,8 +204,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.itemsClickBlock) {
+        [self hiddenMenu];
         self.itemsClickBlock(self.listTitles[indexPath.row], indexPath.row+1);
     }
+
 }
 
 - (void)hiddenMenu{

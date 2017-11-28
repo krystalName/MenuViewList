@@ -31,8 +31,7 @@ typedef void(^IteomsClickBlock)(NSString *str,NSInteger tag);
 //展示菜单, 定点展示
 +(void)showMenuAtPoint:(CGPoint)point;
 
-//隐藏菜单
-+(void)hiddenView;
+
 
 
 

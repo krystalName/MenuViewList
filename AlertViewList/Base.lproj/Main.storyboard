@@ -44,6 +44,11 @@
                                 <action selector="click:" destination="BYZ-38-t0r" id="VGm-o9-Mx4"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="how-s5-lug">
+                            <connections>
+                                <action selector="fileClick:" destination="BYZ-38-t0r" id="xsu-26-hf6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>

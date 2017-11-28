@@ -10,6 +10,7 @@
 #import "KNTableAlertView.h"
 #import "KNTableCenterAlertView.h"
 #import "KNMenuAlertView.h"
+#import "UIView+KNViewExtend.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -42,7 +43,7 @@
                                     ];
     
     [KNMenuAlertView createViewWiththImages:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSString *str, NSInteger tag) {
-        
+         [self CreateAlertView:tag];
     }];
     
 
@@ -145,18 +146,12 @@
 
 - (IBAction)click:(UIBarButtonItem *)sender {
     
-    
+    [KNMenuAlertView showMenuAtPoint:CGPointMake(30, 50)];
 }
+- (IBAction)fileClick:(UIBarButtonItem *)sender {
+    
+    [KNMenuAlertView showMenuAtPoint:CGPointMake(self.navigationController.view.width - 30, 50)];
 
-
-- (void)popMenu:(CGPoint)point{
-    if (self.flag) {
-        [KNTableCenterAlertView showMenuAtPoint:point];
-        self.flag = NO;
-    }else{
-        [KNTableCenterAlertView hidden];
-        self.flag = YES;
-    }
 }
 
 
