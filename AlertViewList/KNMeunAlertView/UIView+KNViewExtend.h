@@ -14,6 +14,12 @@
 
 @interface UIView (KNViewExtend)
 
+
+@property (assign, nonatomic) CGFloat x;
+@property (assign, nonatomic) CGFloat y;
+@property (nonatomic,assign) CGFloat max_X;
+@property (nonatomic,assign) CGFloat max_Y;
+
 /**
  * Shortcut for frame.origin.x.
  *

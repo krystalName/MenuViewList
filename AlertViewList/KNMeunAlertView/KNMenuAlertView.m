@@ -54,12 +54,80 @@
 
 -(void)initView{
 
+    self.arrowPointX = self.width * 0.5;
+    [self addSubview:self.menuTableView];
+    self.menuTableView.frame = CGRectMake(0, kTriangleHeight, self.width, self.height);
+    self.height = self.menuTableView.height + kTriangleHeight * 2 - 0.5;
     
+    
+    CAShapeLayer *lay = [self getBorderLayer];
+    self.layer.mask = lay;
+    
+
 }
+
+#pragma mark --- 关于菜单展示
+- (void)displayAtPoint:(CGPoint)point{
+    
+    point = [self.superview convertPoint:point toView:self.window];
+    self.layer.affineTransform = CGAffineTransformIdentity;
+    [self adjustPosition:point]; // 调整展示的位置 - frame
+    
+    // 调整箭头位置
+    if (point.x <= kMargin + kRadius + kTriangleHeight * 0.7) {
+        _arrowPointX = kMargin + kRadius;
+    }else if (point.x >= KSCREEN_WIDTH - kMargin - kRadius - kTriangleHeight * 0.7){
+        _arrowPointX = self.width - kMargin - kRadius;
+    }else{
+        _arrowPointX = point.x - self.x;
+    }
+    
+    // 调整anchorPoint
+    CGPoint aPoint = CGPointMake(0.5, 0.5);
+    if (CGRectGetMaxY(self.frame) > KSCREEN_HEIGHT) {
+        aPoint = CGPointMake(_arrowPointX / self.width, 1);
+    }else{
+        aPoint = CGPointMake(_arrowPointX / self.width, 0);
+    }
+    
+    // 调整layer
+    CAShapeLayer *layer = [self getBorderLayer];
+    if (self.max_Y > KSCREEN_HEIGHT) {
+        layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+        layer.transform = CATransform3DRotate(layer.transform, M_PI, 0, 0, 1);
+        self.y = point.y - self.height;
+    }
+    
+    // 调整frame
+    CGRect rect = self.frame;
+    self.layer.anchorPoint = aPoint;
+    self.frame = rect;
+    
+    self.layer.mask = layer;
+    self.layer.affineTransform = CGAffineTransformMakeScale(0.01, 0.01);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 1;
+
+        self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
+    }];
+}
+
+- (void)adjustPosition:(CGPoint)point{
+    self.x = point.x - self.width * 0.5;
+    self.y = point.y + kMargin;
+    if (self.x < kMargin) {
+        self.x = kMargin;
+    }else if (self.x > KSCREEN_WIDTH - kMargin - self.width){
+        self.x = KSCREEN_WIDTH - kMargin - self.width;
+    }
+    self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
+}
+
 
 
 +(void)showMenuAtPoint:(CGPoint)point
 {
+    KNMenuAlertView *menuView = [[UIApplication sharedApplication].keyWindow viewWithTag:kMenuTag];
     
 }
 
@@ -125,6 +193,8 @@
         _menuTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
+        _menuTableView.bounces = NO;
+        _menuTableView.showsVerticalScrollIndicator = NO;
         _menuTableView.sectionHeaderHeight = 0;
         _menuTableView.sectionFooterHeight = 0;
         _menuTableView.estimatedRowHeight = 40;

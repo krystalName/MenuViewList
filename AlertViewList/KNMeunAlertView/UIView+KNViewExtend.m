@@ -10,8 +10,48 @@
 
 @implementation UIView (KNViewExtend)
 
+
+- (void)setX:(CGFloat)x
+{
+    CGRect frame = self.frame;
+    frame.origin.x = x;
+    self.frame = frame;
+}
+
+- (CGFloat)x
+{
+    return self.frame.origin.x;
+}
+
+- (void)setY:(CGFloat)y
+{
+    CGRect frame = self.frame;
+    frame.origin.y = y;
+    self.frame = frame;
+}
+
+- (CGFloat)y
+{
+    return self.frame.origin.y;
+}
+
 - (CGFloat)left {
     return self.frame.origin.x;
+}
+
+- (CGFloat)max_X{
+    return CGRectGetMaxX(self.frame);
+}
+- (void)setMax_X:(CGFloat)max_X{}
+
+- (CGFloat)max_Y{
+    return CGRectGetMaxY(self.frame);
+}
+- (void)setMax_Y:(CGFloat)max_Y{}
+
+- (CGFloat)width
+{
+    return self.frame.size.width;
 }
 
 
