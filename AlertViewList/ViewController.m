@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "KNTableAlertView.h"
 #import "KNTableCenterAlertView.h"
+#import "KNMenuAlertView.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -34,6 +35,16 @@
     
     [self.view addSubview:self.tableView];
     self.tableView.frame = self.view.bounds;
+    
+    
+    //定义一个图片数组
+    NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
+                                    ];
+    
+    [KNMenuAlertView createViewWiththImages:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSString *str, NSInteger tag) {
+        
+    }];
+    
 
 }
 
@@ -121,14 +132,6 @@
     
 }
 
--(void)CreateKNMeunAlertView{
-    
-    
-    
-
-}
-
-
 
 -(void)CreateAlertView:(NSInteger)index{
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"这是选择的下标" message:[NSString stringWithFormat:@"%ld",index]
@@ -140,13 +143,27 @@
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
+- (IBAction)click:(UIBarButtonItem *)sender {
+    
+    
+}
+
+
+- (void)popMenu:(CGPoint)point{
+    if (self.flag) {
+        [KNTableCenterAlertView showMenuAtPoint:point];
+        self.flag = NO;
+    }else{
+        [KNTableCenterAlertView hidden];
+        self.flag = YES;
+    }
+}
 
 
 -(NSArray *)dataArray{
     if(!_dataArray)
     {
         _dataArray = [NSArray arrayWithObjects:@"由下向上弹出式表格选择",@"中间弹出式表格", nil];
-        
     }
     return _dataArray;
 }

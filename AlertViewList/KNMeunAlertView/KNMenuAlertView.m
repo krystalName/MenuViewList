@@ -10,6 +10,7 @@
 #import "UIView+KNViewExtend.h"
 
 #define kMenuTag 201712
+#define kCoverViewTag 201722
 #define kMargin 8
 #define kTriangleHeight 10 // 三角形的高
 #define kRadius 5 // 圆角半径
@@ -33,37 +34,66 @@
 //箭头位置
 @property(nonatomic, assign)CGFloat arrowPointX;
 
+//背景View
+@property(nonatomic, strong)UIView * backView;
 @end
 
 @implementation KNMenuAlertView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
+
+        [self initView];
+    }
+    return self;
+}
 
 
 +(KNMenuAlertView *)createViewWiththImages:(NSArray<UIImage *> *)images ListTitles:(NSArray<NSString *> *)listTitles block:(IteomsClickBlock)block
 {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
-    KNMenuAlertView *menuView = [[KNMenuAlertView alloc]initWithFrame:CGRectMake(0, 0, 120, 40 * listTitles.count)];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    NSInteger NScount = images.count > listTitles.count ? listTitles.count : images.count;
+    if (NScount > KDefaultMaxValue) {
+        NScount = KDefaultMaxValue ;
+    }
+ 
+    KNMenuAlertView *menuView = [[KNMenuAlertView alloc]initWithFrame:CGRectMake(0, 0, 120, (40 * NScount)+(kTriangleHeight * 2))];
     menuView.listTitles = listTitles;
     menuView.images = images;
     menuView.itemsClickBlock = block;
     [menuView initView];
     menuView.tag = kMenuTag;
-    [window addSubview:menuView];
     return menuView;
+    
 }
 
 -(void)initView{
-
+    
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
     self.arrowPointX = self.width * 0.5;
-    [self addSubview:self.menuTableView];
-    self.menuTableView.frame = CGRectMake(0, kTriangleHeight, self.width, self.height);
-    self.height = self.menuTableView.height + kTriangleHeight * 2 - 0.5;
+    self.menuTableView.frame = CGRectMake(0, kTriangleHeight, self.width, self.height - kTriangleHeight * 2);
+    self.alpha = 0;    
+    //背景View
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
+    backView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+    [backView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)]];
+    backView.alpha = 0;
+    backView.tag = kCoverViewTag;
+    _backView = backView;
+    [window addSubview:backView];
     
-    
+    //添加箭头
     CAShapeLayer *lay = [self getBorderLayer];
     self.layer.mask = lay;
     
-
+    //添加表格
+    [self addSubview:self.menuTableView];
+    [window addSubview:self];
 }
 
 #pragma mark --- 关于菜单展示
@@ -107,7 +137,7 @@
     self.layer.affineTransform = CGAffineTransformMakeScale(0.01, 0.01);
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 1;
-
+        _backView.alpha = 0.3;
         self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
     }];
 }
@@ -123,18 +153,21 @@
     self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
 }
 
-
+- (void)tap:(UITapGestureRecognizer *)sender{
+    [self hiddenMenu];
+}
 
 +(void)showMenuAtPoint:(CGPoint)point
 {
     KNMenuAlertView *menuView = [[UIApplication sharedApplication].keyWindow viewWithTag:kMenuTag];
-    
+    [menuView displayAtPoint:point];
 }
 
 
 +(void)hiddenView
 {
-    
+    KNMenuAlertView *menuView = [[UIApplication sharedApplication].keyWindow viewWithTag:kMenuTag];
+    [menuView hiddenMenu];
 }
 
 
@@ -146,14 +179,60 @@
 
 #pragma mark - 设置总共的行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.listTitles.count;
+    
+    NSInteger count ;
+    if (self.images.count > 0) {
+        //如果图片数量大于内容数量.就取内容数量,否则取图片数量
+        count= self.images.count > self.listTitles.count ? self.listTitles.count : self.images.count;
+        
+    }else{
+        count = self.listTitles.count;
+    }
+    return count;
 }
-
-
 
 #pragma mark - 设置cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
+    }
+    
+    [cell.imageView setImage:self.images[indexPath.row]];
+    cell.textLabel.text = self.listTitles[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.itemsClickBlock) {
+        self.itemsClickBlock(self.listTitles[indexPath.row], indexPath.row+1);
+    }
+}
+
+- (void)hiddenMenu{
+    self.menuTableView.contentOffset = CGPointMake(0, 0);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.layer.affineTransform = CGAffineTransformMakeScale(0.01, 0.01);
+        _backView.alpha = 0;
+        self.alpha = 0;
+    }];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 
@@ -195,8 +274,6 @@
         _menuTableView.dataSource = self;
         _menuTableView.bounces = NO;
         _menuTableView.showsVerticalScrollIndicator = NO;
-        _menuTableView.sectionHeaderHeight = 0;
-        _menuTableView.sectionFooterHeight = 0;
         _menuTableView.estimatedRowHeight = 40;
     }
     return _menuTableView;
