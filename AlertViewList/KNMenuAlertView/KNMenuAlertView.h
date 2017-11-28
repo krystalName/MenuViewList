@@ -1,5 +1,5 @@
 //
-//  KNMeunAlertView.h
+//  KNMenuAlertView.h
 //  AlertViewList
 //
 //  Created by 刘凡 on 2017/8/1.
