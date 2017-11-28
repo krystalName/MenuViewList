@@ -9,8 +9,8 @@
 #import "ViewController.h"
 #import "KNTableAlertView.h"
 #import "KNTableCenterAlertView.h"
-//#import "KNMenuAlertView.h"
-//#import "UIView+KNViewExtend.h"
+#import "KNMenuAlertView.h"
+#import "UIView+KNViewExtend.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -38,13 +38,13 @@
     self.tableView.frame = self.view.bounds;
     
     
-//    //定义一个图片数组
-//    NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
-//                                    ];
-//
-//    [KNMenuAlertView createViewWiththImages:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSString *str, NSInteger tag) {
-//         [self CreateAlertView:tag];
-//    }];
+    //定义一个图片数组
+    NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
+                                    ];
+
+    [KNMenuAlertView createViewWiththImages:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSString *str, NSInteger tag) {
+         [self CreateAlertView:tag];
+    }];
     
 
 }
@@ -146,11 +146,11 @@
 
 - (IBAction)click:(UIBarButtonItem *)sender {
     
-//    [KNMenuAlertView showMenuAtPoint:CGPointMake(30, 50)];
+    [KNMenuAlertView showMenuAtPoint:CGPointMake(30, 50)];
 }
 - (IBAction)fileClick:(UIBarButtonItem *)sender {
     
-//    [KNMenuAlertView showMenuAtPoint:CGPointMake(self.navigationController.view.width - 30, 50)];
+    [KNMenuAlertView showMenuAtPoint:CGPointMake(self.navigationController.view.width - 30, 50)];
 
 }
 
