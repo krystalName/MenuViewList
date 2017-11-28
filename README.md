@@ -45,3 +45,23 @@
         
     }];
 ```
+
+# 第三种模式  效果图如下
+![](https://github.com/krystalName/MenuViewList/blob/MenuView/KNMenuView.gif)
+
++ 使用方法和上面两种稍微不用。 因为要设置所展示的位置
+
+``` objc
+  
+    //定义一个图片数组
+    NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
+                                    ];
+
+    
+    [KNTableCenterAlertView ShowWIthTitle:@"这是标题" Images:images ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] SelectedIndex:1 block:^(NSInteger index) {
+        
+    }];
+
+//还要在适当的地方调用   设置一个CGPointMake
+   [KNMenuAlertView showMenuAtPoint:CGPointMake(30, 50)];
+```
