@@ -17,6 +17,7 @@
 		C241D3F61F2F08E3003218C0 /* KNTableCenterAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C241D3F51F2F08E3003218C0 /* KNTableCenterAlertView.m */; };
 		C2DFFB491FCD300B00831398 /* UIView+KNViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFFB451FCD300B00831398 /* UIView+KNViewExtend.m */; };
 		C2DFFB4A1FCD300B00831398 /* KNMenuAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFFB471FCD300B00831398 /* KNMenuAlertView.m */; };
+		C2DFFB501FCE97BB00831398 /* KNMenuViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFFB4F1FCE97BB00831398 /* KNMenuViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		C2DFFB461FCD300B00831398 /* KNMenuAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNMenuAlertView.h; sourceTree = "<group>"; };
 		C2DFFB471FCD300B00831398 /* KNMenuAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNMenuAlertView.m; sourceTree = "<group>"; };
 		C2DFFB481FCD300B00831398 /* UIView+KNViewExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KNViewExtend.h"; sourceTree = "<group>"; };
+		C2DFFB4E1FCE97BB00831398 /* KNMenuViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNMenuViewCell.h; sourceTree = "<group>"; };
+		C2DFFB4F1FCE97BB00831398 /* KNMenuViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNMenuViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				C2DFFB461FCD300B00831398 /* KNMenuAlertView.h */,
 				C2DFFB471FCD300B00831398 /* KNMenuAlertView.m */,
 				C2DFFB481FCD300B00831398 /* UIView+KNViewExtend.h */,
+				C2DFFB4E1FCE97BB00831398 /* KNMenuViewCell.h */,
+				C2DFFB4F1FCE97BB00831398 /* KNMenuViewCell.m */,
 			);
 			path = KNMenuAlertView;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				C241D3F61F2F08E3003218C0 /* KNTableCenterAlertView.m in Sources */,
 				C241D3F21F2F08BA003218C0 /* KNTableAlertView.m in Sources */,
 				C2DFFB4A1FCD300B00831398 /* KNMenuAlertView.m in Sources */,
+				C2DFFB501FCE97BB00831398 /* KNMenuViewCell.m in Sources */,
 				C24165751F29BEF60077FBEE /* AppDelegate.m in Sources */,
 				C2DFFB491FCD300B00831398 /* UIView+KNViewExtend.m in Sources */,
 				C24165721F29BEF60077FBEE /* main.m in Sources */,
