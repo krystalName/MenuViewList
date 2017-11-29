@@ -56,7 +56,7 @@
 {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
     
-    NSInteger NScount = images.count > listTitles.count ? listTitles.count : images.count;
+    NSInteger NScount = images.count > listTitles.count ? images.count : listTitles.count;
     if (NScount > KDefaultMaxValue) {
         NScount = KDefaultMaxValue ;
     }
@@ -266,7 +266,7 @@
 #pragma mark - 懒加载
 -(UITableView *)menuTableView{
     if (!_menuTableView) {
-        _menuTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _menuTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
         _menuTableView.bounces = NO;
