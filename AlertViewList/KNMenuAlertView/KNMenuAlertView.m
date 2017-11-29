@@ -8,6 +8,7 @@
 
 #import "KNMenuAlertView.h"
 #import "UIView+KNViewExtend.h"
+#import "KNMenuViewCell.h"
 
 #define kMenuTag 201712
 #define kCoverViewTag 201722
@@ -24,18 +25,20 @@
 /**
  标签数组
  */
-@property (nonatomic, strong)NSArray <NSString *> * listTitles;
+@property (nonatomic, strong)NSMutableArray <NSString *> * listTitles;
 
 /**
  图片数组
  */
-@property (nonatomic, strong) NSArray <UIImage * >* images;
+@property (nonatomic, strong) NSMutableArray <UIImage * >* images;
 
 //箭头位置
 @property(nonatomic, assign)CGFloat arrowPointX;
 
 //背景View
 @property(nonatomic, strong)UIView * backView;
+
+
 @end
 
 @implementation KNMenuAlertView
@@ -56,14 +59,29 @@
 {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
     
-    NSInteger NScount = images.count > listTitles.count ? images.count : listTitles.count;
+
+    NSInteger NScount = listTitles.count;
     if (NScount > KDefaultMaxValue) {
         NScount = KDefaultMaxValue ;
     }
+    
  
-    KNMenuAlertView *menuView = [[KNMenuAlertView alloc]initWithFrame:CGRectMake(0, 0, 120, (40 * NScount)+(kTriangleHeight * 2))];
-    menuView.listTitles = listTitles;
-    menuView.images = images;
+    KNMenuAlertView *menuView = [[KNMenuAlertView alloc]initWithFrame:CGRectMake(0, 0, 120, (40 * NScount)+(kTriangleHeight * 2))];\
+    
+    //如果图片数组比列表数组少的时候。 添加一个空的图片
+     menuView.listTitles = [NSMutableArray arrayWithArray:listTitles];
+
+    
+    //如果图片数组比列表数组少的时候。 添加一个空的图片
+    menuView.images = [NSMutableArray arrayWithArray:images];
+    if (images.count < listTitles.count ) {
+        NSInteger maxCont = listTitles.count - images.count ;
+        for (int i = 0; i <maxCont; i++) {
+            [menuView.images addObject:[UIImage new]];
+        }
+    }
+    
+    
     menuView.itemsClickBlock = block;
     [menuView initView];
     menuView.tag = kMenuTag;
@@ -174,31 +192,21 @@
 
 #pragma mark - 设置总共的行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSInteger count ;
-    if (self.images.count > 0) {
-        //如果图片数量大于内容数量.就取内容数量,否则取图片数量
-        count= self.images.count > self.listTitles.count ? self.listTitles.count : self.images.count;
-        
-    }else{
-        count = self.listTitles.count;
-    }
-    return count;
+    return self.listTitles.count;
 }
+
+#pragma mark - 赋值
+-(void)tableView:(UITableView *)tableView willDisplayCell:(KNMenuViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [cell SetCellValueWithImage:self.images[indexPath.row] AndLable:self.listTitles[indexPath.row]];
+    
+}
+
 
 #pragma mark - 设置cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
-//        cell.textLabel.textColor = [UIColor whiteColor];
-//        cell.backgroundColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
-    }
-    
-    [cell.imageView setImage:self.images[indexPath.row]];
-    cell.textLabel.text = self.listTitles[indexPath.row];
-    return cell;
+    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([KNMenuViewCell class])];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -270,8 +278,10 @@
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
         _menuTableView.bounces = NO;
+        _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _menuTableView.showsVerticalScrollIndicator = NO;
         _menuTableView.estimatedRowHeight = 40;
+        [_menuTableView registerClass:[KNMenuViewCell class] forCellReuseIdentifier:NSStringFromClass([KNMenuViewCell class])];
     }
     return _menuTableView;
 }

@@ -26,6 +26,8 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [self.contentView addSubview:self.iConImageView];
         [self.contentView addSubview:self.contentLbale];
         [self.contentView addSubview:self.lienView];
@@ -47,9 +49,9 @@
 
 -(void)layoutCellUI{
     
-    self.iConImageView.frame = CGRectMake(10, self.contentView.height / 2 - 15 , 30, 30);
+    self.iConImageView.frame = CGRectMake(10, self.contentView.height / 2 - 10 , 20, 20);
     self.contentLbale.frame = CGRectMake( 40, self.contentView.height / 2 - 7 , self.contentView.width - 50, 15);
-    self.lienView.frame = CGRectMake(0, self.contentView.height - 0.5 , self.contentView.width, 0.5);
+    self.lienView.frame = CGRectMake(0, self.contentView.height , self.contentView.width, 0.5);
     
 }
 
@@ -68,7 +70,7 @@
 -(UILabel *)contentLbale{
     if (!_contentLbale) {
         _contentLbale = [[UILabel alloc]init];
-        _contentLbale.textColor = [UIColor lightTextColor];
+        _contentLbale.textColor = [UIColor grayColor];
         _contentLbale.font = [UIFont systemFontOfSize:13];
     }
     return _contentLbale;

@@ -10,4 +10,7 @@
 
 @interface KNMenuViewCell : UITableViewCell
 
+
+-(void)SetCellValueWithImage:(UIImage *)iconImage AndLable:(NSString *)lable;
+
 @end

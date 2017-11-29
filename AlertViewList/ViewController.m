@@ -38,11 +38,11 @@
     self.tableView.frame = self.view.bounds;
     
     
-//    //定义一个图片数组
-//    NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
-//                                    ];
+    //定义一个图片数组
+    NSArray <UIImage *> * images =@[[UIImage imageNamed:@"right_menu_addFri"],[UIImage imageNamed:@"right_menu_facetoface"],[UIImage imageNamed:@"right_menu_multichat"],[UIImage imageNamed:@"right_menu_payMoney"]
+                                    ];
 
-    [KNMenuAlertView createViewWiththImages:nil ListTitles:@[@"ansdnj",@"asmk",@"asnjdakjs",@"asdasda",@"assad"] block:^(NSString *str, NSInteger tag) {
+    [KNMenuAlertView createViewWiththImages:images ListTitles:@[@"ansdnj",@"asmk"] block:^(NSString *str, NSInteger tag) {
          [self CreateAlertView:tag];
     }];
     
